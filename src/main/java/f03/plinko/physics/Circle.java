@@ -10,7 +10,7 @@ import java.awt.geom.Ellipse2D;
 public class Circle {
     private Vector2 pos;
     private Vector2 vel = new Vector2();
-    private Vector2 acc = new Vector2(0.0, 1.0);
+    private Vector2 acc = new Vector2(0.0, 0.1);
     
     private Ellipse2D.Double ellipse;
     
@@ -28,7 +28,7 @@ public class Circle {
         
         double l;
         if((l = diff.length()) < radius + c.radius){
-            double delta = radius + c.radius - diff.length();
+            double delta = radius + c.radius - l;
             
             diff.norm();
             

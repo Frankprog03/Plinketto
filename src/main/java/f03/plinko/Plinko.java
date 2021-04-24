@@ -1,5 +1,7 @@
 package f03.plinko;
 
+import f03.plinko.gui.MainJFrame;
+
 /**
  *
  * @author Sollazzi
@@ -7,6 +9,6 @@ package f03.plinko;
 public class Plinko {
     
     public static void main(String[] args){
-        
+        MainJFrame.main(args);
     }
 }

@@ -5,6 +5,7 @@ import f03.plinko.physics.Vector2;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Timer;
@@ -14,7 +15,6 @@ import javax.swing.Timer;
  * @author Sollazzi
  */
 public class GraphicsPanel extends javax.swing.JPanel {
-    
     private Circle c = new Circle(new Vector2(100, 100), 10);
     
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
@@ -49,6 +49,8 @@ public class GraphicsPanel extends javax.swing.JPanel {
         super.paintComponent(g2);
         
         Graphics2D g = (Graphics2D) g2;
+        
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         int w = getWidth();
         int h = getHeight();
