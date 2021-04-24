@@ -120,12 +120,15 @@ public class MainJFrame extends javax.swing.JFrame {
         if(jRadioButton1.isSelected()){
             jTextField2.setVisible(false);
             jButton2.setVisible(false);
+            jButton1.setVisible(true);
         }
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         if(jRadioButton2.isSelected()){
             jButton1.setVisible(false);
+            jButton2.setVisible(true);
+            jTextField2.setVisible(true);
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
