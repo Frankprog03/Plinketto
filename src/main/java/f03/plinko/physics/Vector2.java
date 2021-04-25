@@ -3,6 +3,7 @@ package f03.plinko.physics;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
+
 import static java.lang.Math.*;
 
 /**
@@ -127,8 +128,10 @@ public class Vector2 {
         return sqrt(x*x + y*y);
     }
     
-    public void norm(){
+    public Vector2 norm(){
         scaleLocal(1.0/length());
+        
+        return this;
     }
     
     public Vector2 opposite(){
@@ -175,5 +178,31 @@ public class Vector2 {
     
     public static Vector2 getInvalidVector(){
         return new Vector2(Double.NaN, Double.NaN);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vector2 other = (Vector2) obj;
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+            return false;
+        }
+        return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
     }
 }

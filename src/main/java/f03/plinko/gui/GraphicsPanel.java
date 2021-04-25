@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.Timer;
 
@@ -15,15 +16,18 @@ import javax.swing.Timer;
  * @author Sollazzi
  */
 public class GraphicsPanel extends javax.swing.JPanel {
-    private Circle c = new Circle(new Vector2(100, 100), 10);
+    Circle c = new Circle(new Vector2(529/2.0, 0.0), 2.0, false);
+        
+    ArrayList<Circle> franz = new ArrayList();
     
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
-        c.update();
         repaint();
     });
     
     public GraphicsPanel() {
         initComponents();
+        
+        generatePlinko(10);
         
         timer.start();
     }
@@ -31,6 +35,12 @@ public class GraphicsPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -44,6 +54,11 @@ public class GraphicsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        //c0.setPosition(new Vector2(evt.getX(), evt.getY()));
+        //repaint();
+    }//GEN-LAST:event_formMouseMoved
+
     @Override
     protected void paintComponent(Graphics g2){
         super.paintComponent(g2);
@@ -55,7 +70,31 @@ public class GraphicsPanel extends javax.swing.JPanel {
         int w = getWidth();
         int h = getHeight();
         
-        c.draw(g);
+        g.translate(w/2, 0);
+        
+        for(Circle c0 : franz){
+            c0.draw(g);
+            c.checkCollision(c0);
+            c.update();
+            c.draw(g);
+        }
+    }
+    
+    public void generatePlinko(int b){
+        franz.clear();
+        
+        for(int i=0; i<b; i++){ //i=n. colonna a partire dal centro	
+            for(int k=i; k<b; k+=2){ //k=n. pirulo della colonna
+                //disegno la colonna alla destra di quella centrale a una certa distanza
+                Vector2 v = new Vector2(i*10, 100+k*10);
+                Circle c = new Circle(v, 5);
+                franz.add(c);
+                //disegno la colonna corrispondente ma a sinistra 
+                v = new Vector2(-i*10, 100+k*10);
+                c = new Circle(v, 5);
+                franz.add(c);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

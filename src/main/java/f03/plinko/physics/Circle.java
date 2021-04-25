@@ -14,11 +14,18 @@ public class Circle {
     
     private Ellipse2D.Double ellipse;
     
+    private double mass = 0.2;
     private double radius;
+    private boolean fixed;
     
     public Circle(Vector2 pos, double radius){
+        this(pos, radius, true);
+    }
+    
+    public Circle(Vector2 pos, double radius, boolean fixed){
         this.pos = pos;
         this.radius = radius;
+        this.fixed = fixed;
         
         ellipse = new Ellipse2D.Double(-radius, -radius, radius*2.0, radius*2.0);
     }
@@ -32,6 +39,9 @@ public class Circle {
             
             diff.norm();
             
+            setPosition(c.getPosition().add(diff.scale(2*c.getRadius())));
+            applyForce(diff.scale(-1.0));
+            
             return diff.scale(delta);
         }
         
@@ -39,8 +49,11 @@ public class Circle {
     }
     
     public void update(){
-        pos.addLocal(vel);
-        vel.addLocal(acc);
+        if(!fixed){
+            vel.addLocal(acc);
+            pos.addLocal(vel);
+            acc.set(0.0, 0.1);
+        }
     }
     
     public void draw(Graphics2D g){
@@ -53,8 +66,15 @@ public class Circle {
         return pos;
     }
     
+    public void setPosition(Vector2 pos){
+        this.pos.set(pos);
+    }
+    
+    public void applyForce(Vector2 f){
+        acc.addLocal(f.scale(-1.0/mass));
+    }
+    
     public double getRadius(){
         return radius;
     }
-    
 }
