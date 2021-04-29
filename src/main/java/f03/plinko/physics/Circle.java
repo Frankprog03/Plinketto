@@ -14,7 +14,7 @@ public class Circle {
     
     private Ellipse2D.Double ellipse;
     
-    private double mass = 0.2;
+    private double mass = 2;
     private double radius;
     private boolean fixed;
     
@@ -39,8 +39,9 @@ public class Circle {
             
             diff.norm();
             
-            setPosition(c.getPosition().add(diff.scale(2*c.getRadius())));
-            applyForce(diff.scale(-1.0));
+            setPosition(c.getPosition().add(diff.scale(2.0*c.getRadius())));
+            vel.set(0.0, 0.0);
+            applyMomentum(diff.scale(0.5));
             
             return diff.scale(delta);
         }
@@ -66,8 +67,17 @@ public class Circle {
         return pos;
     }
     
+    public void tp(Vector2 pos){
+        setPosition(pos);
+        vel.set(0.0, 0.0);
+    }
+    
     public void setPosition(Vector2 pos){
         this.pos.set(pos);
+    }
+    
+    public void applyMomentum(Vector2 p){
+        vel.addLocal(p);
     }
     
     public void applyForce(Vector2 f){

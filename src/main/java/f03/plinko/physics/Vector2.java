@@ -34,14 +34,18 @@ public class Vector2 {
         return new Vector2(this);
     }
     
-    public void set(double x, double y){
+    public Vector2 set(double x, double y){
         this.x = x;
         this.y = y;
+        
+        return this;
     }
     
-    public void set(Vector2 v){
+    public Vector2 set(Vector2 v){
         x = v.x;
         y = v.y;
+        
+        return this;
     }
     
     public double getX(){
@@ -105,6 +109,10 @@ public class Vector2 {
     
     public Vector2 scale(double f){
         return cpy().scaleLocal(f);
+    }
+    
+    public Vector2 scale(double a, double b){
+        return cpy().set(x*a, y*b);
     }
     
     public double dot(Vector2 v){
