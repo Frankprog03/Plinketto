@@ -150,6 +150,10 @@ public class Vector2 {
         set(0, 0);
     }
     
+    public boolean isZero(){
+        return x == 0 && y == 0;
+    }
+    
     public boolean isValid(){
         return Double.isFinite(x) && Double.isFinite(y);
     }

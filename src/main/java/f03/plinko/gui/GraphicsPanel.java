@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 
+import java.util.Random;
+
 import javax.swing.Timer;
 
 /**
@@ -16,7 +18,7 @@ import javax.swing.Timer;
  * @author Sollazzi
  */
 public class GraphicsPanel extends javax.swing.JPanel {
-    Circle c = new Circle(new Vector2(0, 10.0), 4.0, false);
+    Circle c = new Circle(new Vector2(new Random().nextGaussian(), 10.0), 4.0, false);
     
     Plinko plinko = new Plinko();
     
@@ -27,7 +29,8 @@ public class GraphicsPanel extends javax.swing.JPanel {
     public GraphicsPanel() {
         initComponents();
         
-        plinko.generatePlinko(10);
+        plinko.generatePlinko(14);
+        plinko.addBall(c);
         
         timer.start();
     }
@@ -60,12 +63,21 @@ public class GraphicsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        //c0.setPosition(new Vector2(evt.getX(), evt.getY()));
-        //repaint();
+         
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        c.tp(new Vector2(evt.getX() - getWidth()/2, evt.getY()));
+        plinko.addBall(
+                new Circle(
+                        new Vector2(
+                                evt.getX() - getWidth()/2, 
+                                evt.getY()
+                        ), 
+                        4.0, 
+                        false,
+                        10.0
+                )
+        );
     }//GEN-LAST:event_formMouseClicked
 
     @Override
@@ -81,8 +93,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
         
         g.translate(w/2, 0);
         
-        c.update();
-        plinko.update(g, c);
+        plinko.update(g);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
