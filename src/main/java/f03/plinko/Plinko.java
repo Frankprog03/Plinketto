@@ -11,4 +11,4 @@ public class Plinko {
     public static void main(String[] args){
         MainJFrame.main(args);
     }
-}
+} 
