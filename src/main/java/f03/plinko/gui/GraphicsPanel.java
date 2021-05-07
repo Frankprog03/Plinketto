@@ -75,7 +75,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
                         ), 
                         4.0, 
                         false,
-                        10.0
+                        5.0
                 )
         );
     }//GEN-LAST:event_formMouseClicked

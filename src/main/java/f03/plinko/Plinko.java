@@ -4,10 +4,12 @@ import f03.plinko.gui.MainJFrame;
 
 import f03.plinko.physics.Circle;
 import f03.plinko.physics.Vector2;
+import f03.plinko.plots.Histogram;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,20 +24,23 @@ public class Plinko {
     public static void main(String[] args){
         MainJFrame.main(args);
     }
-        
-    private ArrayList<Circle> franz = new ArrayList();
-    private HashSet<Circle> ballSet = new HashSet();
     
     private int[] bidoncini;
     private int bottom = -1;
     private int size = -1;
+        
+    private ArrayList<Circle> franz = new ArrayList();
+    private HashSet<Circle> ballSet = new HashSet();
     
     private Random rand = new Random();
+    
+    private Histogram histogram = new Histogram(null);
     
     public void generatePlinko(int b){
         franz.clear();
         
         bidoncini = new int[b+1];
+        histogram.bind(bidoncini);
         
         for(int i=0; i<b; i++){
             for(int k=i; k<b; k+=2){
@@ -93,6 +98,8 @@ public class Plinko {
             }
             ball.draw(g);
         }
+        
+        //histogram.draw(new Rectangle(0, 0, 200, 200), g);
     }
     
     public void addBall(Circle c){
