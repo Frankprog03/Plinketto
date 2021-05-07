@@ -22,7 +22,12 @@ public class Statistics {
         }
         return num/den;
     }
-    public static double varianza(ArrayList<Bidoncino> lista){
-        
+    public static double varianza(ArrayList<Bidoncino> lista, double media){
+        double num=0,den=0;
+        for (Bidoncino b : lista){
+            num=num+(b.getNpalline()*(media-b.getI())*(media-b.getI()));
+            den=den+b.getNpalline();
+        }
+        return Math.sqrt(num/den);
     }
 }

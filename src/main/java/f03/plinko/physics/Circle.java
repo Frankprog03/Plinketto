@@ -14,7 +14,7 @@ public class Circle {
     
     private Ellipse2D.Double ellipse;
     
-    private double mass = 0.2;
+    private double mass = 2;
     private double radius;
     private boolean fixed;
     
@@ -30,7 +30,14 @@ public class Circle {
         ellipse = new Ellipse2D.Double(-radius, -radius, radius*2.0, radius*2.0);
     }
     
-    public Vector2 checkCollision(Circle c){
+    public Circle(Vector2 pos, double radius, boolean fixed, double entropy){
+        this(pos, radius, fixed);
+        
+        Vector2 v = new Vector2(entropy * Math.random(), entropy * Math.random());
+        pos.addLocal(v);
+    }
+    
+    public Vector2 checkCollision(Circle c, boolean applyMomentum){
         Vector2 diff = pos.sub(c.pos);
         
         double l;
@@ -39,13 +46,20 @@ public class Circle {
             
             diff.norm();
             
-            setPosition(c.getPosition().add(diff.scale(2*c.getRadius())));
-            applyForce(diff.scale(-1.0));
-            
-            return diff.scale(delta);
+            if(applyMomentum){
+                setPosition(c.getPosition().add(diff.scale(2.0*c.getRadius())));
+                vel.set(0.0, 0.0);
+                applyMomentum(diff.scale(0.5));
+            }
+                
+            return diff.scaleLocal(delta);
         }
         
         return new Vector2();
+    }
+    
+    public Vector2 checkCollision(Circle c){
+        return checkCollision(c, true);
     }
     
     public void update(){
@@ -66,8 +80,25 @@ public class Circle {
         return pos;
     }
     
+    public void tp(Vector2 pos){
+        setPosition(pos);
+        vel.set(0.0, 0.0);
+    }
+    
     public void setPosition(Vector2 pos){
         this.pos.set(pos);
+    }
+    
+    public void setVelocity(Vector2 vel){
+        this.vel.set(vel);
+    }
+    
+    public void setAcceleration(Vector2 acc){
+        this.acc.set(acc);
+    }
+    
+    public void applyMomentum(Vector2 p){
+        vel.addLocal(p);
     }
     
     public void applyForce(Vector2 f){
