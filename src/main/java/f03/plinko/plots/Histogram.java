@@ -82,4 +82,8 @@ public class Histogram {
         
         g.dispose();
     }
+    
+    public void reset(){
+        max=1;
+    }
 }
