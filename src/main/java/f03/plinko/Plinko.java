@@ -26,6 +26,8 @@ public class Plinko {
     }
     
     private int[] bidoncini;
+    private int width = -1;
+    private int left = -1;
     private int bottom = -1;
     private int size = -1;
         
@@ -56,9 +58,13 @@ public class Plinko {
         
         size = b;
         bottom = 100+15*(b-1);
+        left = -b*15;
     }
     
     public void update(Graphics2D g){
+        rand = new Random(); //shuffle seed
+        ballSet.add(new Circle(new Vector2(rand.nextFloat() - 0.5, 10.0), 4.0, false));
+        
         //linee bidoncini
         boolean colorSwitch = false;
         for(int i = 0; i < size-1; i++){
@@ -78,8 +84,24 @@ public class Plinko {
         }
         
         boolean physicsMode = SettingsHolder.mode == SettingsHolder.PlinkettoMode.PHYSICS;
+        ArrayList<Circle> removeQueue = new ArrayList<>();
         for(Circle ball : ballSet){
             ball.update();
+            double xpos = ball.getPosition().x;
+            double ypos = ball.getPosition().y;
+            if(ypos > bottom){
+                xpos -= left;
+                int index = (int) (xpos/(size*30)*bidoncini.length);
+                
+                //g.fillOval(xpos/(size*30), left, index, left);
+                
+                System.out.println(index);
+
+                bidoncini[index]++;
+
+                removeQueue.add(ball);
+            }
+            
             for (Circle c0 : franz) {
                 if(!ball.checkCollision(c0, physicsMode).isZero()){
                     if(!physicsMode){
@@ -99,7 +121,12 @@ public class Plinko {
             ball.draw(g);
         }
         
-        //histogram.draw(new Rectangle(0, 0, 200, 200), g);
+        //per evitare la ConcurrentModificationException
+        for(Circle toRemove : removeQueue){
+            ballSet.remove(toRemove);
+        }
+        
+        histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
     }
     
     public void addBall(Circle c){

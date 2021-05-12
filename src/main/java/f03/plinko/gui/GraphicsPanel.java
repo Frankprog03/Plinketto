@@ -9,8 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 
-import java.util.Random;
-
 import javax.swing.Timer;
 
 /**
@@ -18,8 +16,6 @@ import javax.swing.Timer;
  * @author Sollazzi
  */
 public class GraphicsPanel extends javax.swing.JPanel {
-    Circle c = new Circle(new Vector2(new Random().nextGaussian(), 10.0), 4.0, false);
-    
     Plinko plinko = new Plinko();
     
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
@@ -30,7 +26,6 @@ public class GraphicsPanel extends javax.swing.JPanel {
         initComponents();
         
         plinko.generatePlinko(14);
-        plinko.addBall(c);
         
         timer.start();
     }
