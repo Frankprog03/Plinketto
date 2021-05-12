@@ -1,6 +1,5 @@
 package f03.plinko.plots;
 
-import f03.plinko.Bidoncino;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -11,33 +10,33 @@ import java.awt.Rectangle;
  * @author Sollazzi
  */
 public class Histogram {
-    private Bidoncino[] buckets;
+    private int[] buckets;
     
     int max = 1;
     
     public Histogram(int nOfBuckets){
-        buckets = new Bidoncino[nOfBuckets];
+        buckets = new int[nOfBuckets];
     }
     
-    public Histogram(Bidoncino[] boundBuckets){
+    public Histogram(int[] boundBuckets){
         buckets = boundBuckets;
         
         max();
     }
     
-    public void bind(Bidoncino[] boundBuckets){
+    public void bind(int[] boundBuckets){
         buckets = boundBuckets;
         
         max();
     }
     
-    public void setValue(int i, Bidoncino v){
+    public void setValue(int i, int v){
         buckets[i] = v;
         
         if(v > max) max = v;
     }
     
-    public Bidoncino getValue(int i){
+    public int getValue(int i){
         return buckets[i];
     }
     
