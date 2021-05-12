@@ -25,6 +25,7 @@ public class Plinko {
         MainJFrame.main(args);
     }
     
+    private Bidoncino[] bidoncini;
     private int[] bidoncini;
     private int width = -1;
     private int left = -1;
@@ -41,7 +42,7 @@ public class Plinko {
     public void generatePlinko(int b){
         franz.clear();
         
-        bidoncini = new int[b+1];
+        bidoncini = new Bidoncino[b+1];
         histogram.bind(bidoncini);
         
         for(int i=0; i<b; i++){

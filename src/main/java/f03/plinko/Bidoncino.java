@@ -11,11 +11,18 @@ package f03.plinko;
  */
 public class Bidoncino {
     private int npalline;
+    private int i; //numero del bidoncino
     public int getNpalline() {
         return npalline;
     }
     public void setNpalline(int npalline) {
         this.npalline = npalline;
+    }
+    public int getI() {
+        return i;
+    }
+    public void setI(int i) {
+        this.i = i;
     }
     public void aggiungipallina(){npalline++;}
 }
