@@ -1,9 +1,11 @@
 package f03.plinko;
 
 import f03.plinko.gui.MainJFrame;
+import f03.plinko.math.Gaussian;
 
 import f03.plinko.physics.Circle;
 import f03.plinko.physics.Vector2;
+import f03.plinko.plots.FunctionPlot2D;
 import f03.plinko.plots.Histogram;
 
 import java.awt.BasicStroke;
@@ -37,6 +39,7 @@ public class Plinko {
     private Random rand = new Random();
     
     private Histogram histogram = new Histogram(null);
+    private FunctionPlot2D plot = new FunctionPlot2D(new Gaussian(1.0, 1.0), -3.0, 3.0, 0.001);
     
     public void generatePlinko(int b){
         franz.clear();
@@ -126,7 +129,8 @@ public class Plinko {
             ballSet.remove(toRemove);
         }
         
-        histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
+        //histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
+        plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
     }
     
     public void addBall(Circle c){
