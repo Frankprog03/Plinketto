@@ -6,6 +6,7 @@ import java.awt.geom.Ellipse2D;
 /**
  *
  * @author Sollazzi
+ * @author GABRIELE MARIA
  */
 public class Circle {
     private Vector2 pos;

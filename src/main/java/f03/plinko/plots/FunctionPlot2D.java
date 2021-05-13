@@ -14,7 +14,8 @@ import java.awt.geom.Line2D;
  */
 public class FunctionPlot2D {
     private double[] values;
-    private double from, to, precision;
+    private double from, to, precision, max = 0;
+    private boolean normalize = false;
     
     private Function f;
     
@@ -32,14 +33,29 @@ public class FunctionPlot2D {
         calc();
     }
     
-    private void calc(){
+    public final void calc(){
         int pos = 0;
+        max = 0;
+        
         for(double x = from; from < to && pos < values.length; x += precision){
-            values[pos++] = f.eval(x);
+            values[pos] = f.eval(x);
+            if(values[pos] > max)
+                max = values[pos];
+            pos++;
+        }
+        
+        if(normalize){
+            for(int i = 0; i < values.length; i++){
+                values[i] /= max;
+            }
         }
     }
     
-    public void setSLS(SupplementarDrawSet sds){
+    public void setNormalization(boolean normalize){
+        this.normalize = normalize;
+    }
+    
+    public void setSDS(SupplementarDrawSet sds){
         this.sds = sds;
     }
     
@@ -53,8 +69,12 @@ public class FunctionPlot2D {
         calc();
     }
     
+    public Function getFunction(){
+        return f;
+    }
+    
     public void draw(Rectangle frame, Graphics2D g2d){
-        Graphics2D g = (Graphics2D) g2d.create(frame.x, frame.y, frame.width, frame.height);
+        Graphics2D g = (Graphics2D) g2d.create(frame.x - 10, frame.y, frame.width, frame.height + 10);
         
         int w = frame.width;
         int h = frame.height;
@@ -64,10 +84,15 @@ public class FunctionPlot2D {
         double px = 0;
         double py = values[0];
         
+        g.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g.translate(0, h + 10);
+        g.scale(1, -1);
+        g.drawLine(10, 0, 10, h);
+        g.drawLine(0, 10, w, 10);
+        g.translate(0, 10);
+        
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(1));
-        g.translate(0, h);
-        g.scale(1, -1);
         for(int i = 1; i < values.length; i++){
             Line2D line = new Line2D.Double(px, py, px = i*step, py = values[i] * h);
             

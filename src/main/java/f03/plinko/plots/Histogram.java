@@ -72,11 +72,11 @@ public class Histogram {
             
             double value = buckets[i] / (double) max * h;
             
-            g.fillRect((i-1) * step, 0, step, (int) value);
+            g.fillRect(i * step, 0, step, (int) value);
             g.setColor(Color.black);
-            g.drawLine(i * step, 0, i * step, (int) value);
+            g.drawRect(i * step, 0, step, (int) value);
             g.scale(1, -1);
-            g.drawString(Integer.toString(buckets[i]), (i-1) * step, -10);
+            g.drawString(Integer.toString(buckets[i]), i * step, -10);
             g.scale(1, -1);
         }
         

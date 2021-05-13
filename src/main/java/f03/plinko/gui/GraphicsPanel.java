@@ -7,13 +7,17 @@ import f03.plinko.physics.Vector2;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 import javax.swing.Timer;
 
 /**
  *
  * @author Sollazzi
+ * @author GABRIELE MARIA
  */
 public class GraphicsPanel extends javax.swing.JPanel {
     Plinko plinko = new Plinko();
@@ -101,7 +105,16 @@ public class GraphicsPanel extends javax.swing.JPanel {
         
         g.translate(w/2, 0);
         
-        plinko.update(g);
+        try{
+            plinko.update(g);
+        } catch(Exception e){
+            timer.stop();
+            JOptionPane.showMessageDialog(this, 
+                    "Si è verificato un errore durante l'esecuzione del plinko."
+                            + "\nDettagli:\n" + e.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(System.err);
+            Arrays.asList(Window.getWindows()).forEach(f -> f.dispose());
+        }
     }
     
     public void setnumber(int b){

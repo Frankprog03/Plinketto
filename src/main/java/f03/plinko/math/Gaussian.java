@@ -33,4 +33,12 @@ public class Gaussian implements Function{
     public void setMean(double mean){
         this.mean = mean;
     }
+    
+    public double getStandardDeviation(){
+        return var;
+    }
+    
+    public double getMean(){
+        return mean;
+    }
 }

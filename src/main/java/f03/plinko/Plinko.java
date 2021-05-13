@@ -7,11 +7,15 @@ import f03.plinko.physics.Circle;
 import f03.plinko.physics.Vector2;
 import f03.plinko.plots.FunctionPlot2D;
 import f03.plinko.plots.Histogram;
+import f03.plinko.plots.SupplementarDrawSet;
+import f03.plinko.plots.SupplementarDrawSet.StrokeElement;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,9 +24,9 @@ import java.util.Random;
 /**
  *
  * @author Sollazzi
+ * @author GABRIELE MARIA
  */
 public class Plinko {
-    
     public static void main(String[] args){
         MainJFrame.main(args);
     }
@@ -32,14 +36,17 @@ public class Plinko {
     private int left = -1;
     private int bottom = -1;
     private int size = -1;
+    
+    private double mean = 0.0, stdev = 1.0;
         
     private ArrayList<Circle> franz = new ArrayList();
     private HashSet<Circle> ballSet = new HashSet();
     
     private Random rand = new Random();
     
+    private Gaussian gauss = new Gaussian(1.0, 0.0);
     private Histogram histogram = new Histogram(null);
-    private FunctionPlot2D plot = new FunctionPlot2D(new Gaussian(1.0, 0.0), -3.0, 3.0, 0.001);
+    private FunctionPlot2D plot;
     
     public void generatePlinko(int b){
         franz.clear();
@@ -62,25 +69,27 @@ public class Plinko {
         size = b;
         bottom = 100+15*(b-1);
         left = -b*15;
+        
+        plot = new FunctionPlot2D(gauss = new Gaussian(Double.NaN, Double.NaN), 0.0, b, 0.01);
+        plot.setNormalization(true);
     }
     
     public void update(Graphics2D g){
         rand = new Random(); //shuffle seed
         
+        int s = (size % 2 == 1) ? 30 : 15;
+        
         //linee bidoncini
         boolean colorSwitch = false;
-        int s;
-        if(size%2==0) s=15;
-        else s=30;
         for(int i = 0; i < size+1; i++){
-            int x = (-size/2+i)*30-s;
-            
+            int x = (-size/2+i)*30 - s;
+
             g.setStroke(new BasicStroke(3));
             g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
             g.drawLine(x, bottom, x + 30, bottom);
-            
+
             colorSwitch =! colorSwitch;
-            }
+        }
         
         //update plinketto e palline
         g.setColor(Color.black);
@@ -95,9 +104,11 @@ public class Plinko {
             double xpos = ball.getPosition().x;
             double ypos = ball.getPosition().y;
             if(ypos > bottom){
-                xpos -= left;
-                int index = (int) (xpos/(size*30)*bidoncini.length);
-                System.out.println(index);
+                xpos -= left - 15;
+                int index = (int) -(xpos*size/(2*left));
+                
+                //System.out.println("Ball x: " + xpos + " and calc index " + index);
+
                 bidoncini[index]++;
 
                 removeQueue.add(ball);
@@ -126,8 +137,50 @@ public class Plinko {
             ballSet.remove(toRemove);
         }
         
-        histogram.draw(new Rectangle((-size/2)*30-s, bottom + 10, (size+1)*30, 200), g);
-        plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 210, (size-1)*30, 200), g);
+        mean  = Statistics.mean(bidoncini);
+        stdev = Statistics.stdev(bidoncini, mean);
+        mean -= 1;
+        
+        if(mean != gauss.getMean() || stdev != gauss.getStandardDeviation()){
+            SupplementarDrawSet sds = new SupplementarDrawSet();
+            
+            sds.add(
+                    new StrokeElement(
+                            new Color(255, 0, 0, 50), 
+                            new BasicStroke(1), 
+                            new Rectangle2D.Double(
+                                    (mean - stdev) * -2*left / (double)size + 15,
+                                    0, 
+                                    (2 * stdev) * -2*left / (double)size, 
+                                    200),
+                            true
+                    )
+            );
+            
+            sds.add(
+                    new StrokeElement(
+                            Color.blue, 
+                            new BasicStroke(1, 
+                                    BasicStroke.CAP_SQUARE, 
+                                    BasicStroke.JOIN_BEVEL, 
+                                    1.0f,
+                                    new float[]{5.0f, 3.0f},
+                                    0.0f), 
+                            new Line2D.Double(
+                                    mean * -2*left / (double)size + 15, 0, mean * -2*left / (double)size + 15, 200
+                            )
+                    )
+            );
+            
+            gauss.setMean(mean);
+            gauss.setStandardDeviation(stdev);
+            
+            plot.setSDS(sds);
+            plot.calc();
+        }
+        
+        histogram.draw(new Rectangle(-size/2*30-s, bottom + 10, (size + 1)*30, 200), g);
+        plot.draw(new Rectangle(-size/2*30-s, bottom + 220, (size + 1)*30, 200), g);
     }
     
     public void addBall(Circle c){
