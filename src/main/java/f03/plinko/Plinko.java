@@ -69,29 +69,18 @@ public class Plinko {
     public void update(Graphics2D g){
         rand = new Random(); //shuffle seed
         
+        int s = (size % 2 == 1) ? 30 : 15;
+        
         //linee bidoncini
         boolean colorSwitch = false;
-        if(size%2==0){
-            for(int i = 0; i < size+1; i++){
-            int x = (-size/2+i)*30-15;
-            
+        for(int i = 0; i < size+1; i++){
+            int x = (-size/2+i)*30 - s;
+
             g.setStroke(new BasicStroke(3));
             g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
             g.drawLine(x, bottom, x + 30, bottom);
-            
+
             colorSwitch =! colorSwitch;
-            }
-        }
-        if(size%2==1){
-            for(int i = 0; i < size+1; i++){
-            int x =((-size/2+i)*30-30);
-            
-            g.setStroke(new BasicStroke(3));
-            g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
-            g.drawLine(x, bottom, x + 30, bottom);
-            
-            colorSwitch =! colorSwitch;
-            }
         }
         
         //update plinketto e palline
@@ -107,11 +96,10 @@ public class Plinko {
             double xpos = ball.getPosition().x;
             double ypos = ball.getPosition().y;
             if(ypos > bottom){
-                xpos -= left;
-                int index = (int) (xpos/(size*30)*bidoncini.length);
+                xpos -= left - 15;
+                int index = (int) -(xpos*size/(2*left));
                 
-                //g.fillOval(xpos/(size*30), left, index, left);
-                //System.out.println(index);
+                System.out.println("Ball x: " + xpos + " and calc index " + index);
 
                 bidoncini[index]++;
 
@@ -144,8 +132,8 @@ public class Plinko {
         mean  = Statistics.mean(bidoncini);
         stdev = Statistics.stdev(bidoncini, mean);
         
-        histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
-        plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 210, (size-1)*30, 200), g);
+        histogram.draw(new Rectangle(-size/2*30-s, bottom + 10, (size + 1)*30, 200), g);
+        plot.draw(new Rectangle(-size/2*30-s, bottom + 210, (size + 1)*30, 200), g);
     }
     
     public void addBall(Circle c){

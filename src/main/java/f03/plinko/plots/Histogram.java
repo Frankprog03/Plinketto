@@ -53,8 +53,8 @@ public class Histogram {
         
         int w = frame.width;
         int h = frame.height;
-        int n = buckets.length - 1;
-        int step = frame.width / (n - 1);
+        int n = buckets.length;
+        int step = frame.width / n;
         
         Color theGreen = new Color(0, 180, 0);
         Color theDarkerGreen = theGreen.darker();
@@ -72,9 +72,9 @@ public class Histogram {
             
             double value = buckets[i] / (double) max * h;
             
-            g.fillRect((i-1) * step, 0, step, (int) value);
+            g.fillRect(i * step, 0, step, (int) value);
             g.setColor(Color.black);
-            g.drawLine(i * step, 0, i * step, (int) value);
+            g.drawRect(i * step, 0, step, (int) value);
             g.scale(1, -1);
             g.drawString(Integer.toString(buckets[i]), (i-1) * step, -10);
             g.scale(1, -1);
