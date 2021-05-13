@@ -17,15 +17,28 @@ import javax.swing.Timer;
  */
 public class GraphicsPanel extends javax.swing.JPanel {
     Plinko plinko = new Plinko();
+     
+    int ct=0;
+    int cp=0,pt=0;
+    int delay=1;
+    MainJFrame mjfr;
     
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
         repaint();
+        ct+=10;
+        if((ct%((51-delay)*10)==0)&&(cp>0)){
+            plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
+            cp--;
+            mjfr.aggiornacontatore(pt-cp);
+        }
     });
     
-    public GraphicsPanel() {
+    public GraphicsPanel(MainJFrame m) {
         initComponents();
         
         plinko.generatePlinko(14);
+        
+        this.mjfr=m;
         
         timer.start();
     }
@@ -97,7 +110,12 @@ public class GraphicsPanel extends javax.swing.JPanel {
     }
 
     public void setnpalline(int np){
-        for(int i=0;i<np;i++) plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
+        cp=np;
+        pt=np;
+    }
+    
+    public void setdelay(int d){
+        delay=d;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

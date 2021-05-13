@@ -69,9 +69,11 @@ public class Plinko {
         
         //linee bidoncini
         boolean colorSwitch = false;
-        if(size%2==0){
-            for(int i = 0; i < size+1; i++){
-            int x = (-size/2+i)*30-15;
+        int s;
+        if(size%2==0) s=15;
+        else s=30;
+        for(int i = 0; i < size+1; i++){
+            int x = (-size/2+i)*30-s;
             
             g.setStroke(new BasicStroke(3));
             g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
@@ -79,18 +81,6 @@ public class Plinko {
             
             colorSwitch =! colorSwitch;
             }
-        }
-        if(size%2==1){
-            for(int i = 0; i < size+1; i++){
-            int x =((-size/2+i)*30-30);
-            
-            g.setStroke(new BasicStroke(3));
-            g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
-            g.drawLine(x, bottom, x + 30, bottom);
-            
-            colorSwitch =! colorSwitch;
-            }
-        }
         
         //update plinketto e palline
         g.setColor(Color.black);
@@ -107,11 +97,7 @@ public class Plinko {
             if(ypos > bottom){
                 xpos -= left;
                 int index = (int) (xpos/(size*30)*bidoncini.length);
-                
-                //g.fillOval(xpos/(size*30), left, index, left);
-                
                 System.out.println(index);
-
                 bidoncini[index]++;
 
                 removeQueue.add(ball);
@@ -140,7 +126,7 @@ public class Plinko {
             ballSet.remove(toRemove);
         }
         
-        histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
+        histogram.draw(new Rectangle((-size/2)*30-s, bottom + 10, (size+1)*30, 200), g);
         plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 210, (size-1)*30, 200), g);
     }
     
