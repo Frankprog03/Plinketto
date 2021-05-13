@@ -76,7 +76,7 @@ public class Histogram {
             g.setColor(Color.black);
             g.drawRect(i * step, 0, step, (int) value);
             g.scale(1, -1);
-            g.drawString(Integer.toString(buckets[i]), (i-1) * step, -10);
+            g.drawString(Integer.toString(buckets[i]), i * step, -10);
             g.scale(1, -1);
         }
         

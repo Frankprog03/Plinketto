@@ -26,19 +26,28 @@ public class SupplementarDrawSet {
         for(StrokeElement se : set){
             g.setColor(se.color);
             g.setStroke(se.stroke);
-            g.draw(se.shape);
+            if(se.fill) g.fill(se.shape);
+            else g.draw(se.shape);
         }
     }
     
-    public class StrokeElement {
+    public static class StrokeElement {
         public Color color;
         public BasicStroke stroke;
         public Shape shape;
+        public boolean fill = false;
         
         public StrokeElement(Color color, BasicStroke stroke, Shape shape){
             this.color = color;
             this.stroke = stroke;
             this.shape = shape;
+        }
+        
+        public StrokeElement(Color color, BasicStroke stroke, Shape shape, boolean fill){
+            this.color = color;
+            this.stroke = stroke;
+            this.shape = shape;
+            this.fill = fill;
         }
     }
 }
