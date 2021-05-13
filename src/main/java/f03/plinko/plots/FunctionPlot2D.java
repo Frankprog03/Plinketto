@@ -1,6 +1,7 @@
 package f03.plinko.plots;
 
 import f03.plinko.math.Function;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -17,7 +18,7 @@ public class FunctionPlot2D {
     
     private Function f;
     
-    private SupplementarLineSet sls = null;
+    private SupplementarDrawSet sds = null;
     
     public FunctionPlot2D(Function f, double from, double to, double precision){
         this.from = from;
@@ -38,8 +39,8 @@ public class FunctionPlot2D {
         }
     }
     
-    public void setSLS(SupplementarLineSet sls){
-        this.sls = sls;
+    public void setSLS(SupplementarDrawSet sds){
+        this.sds = sds;
     }
     
     public void setLimits(double from, double to, double precision){
@@ -59,19 +60,22 @@ public class FunctionPlot2D {
         int h = frame.height;
         double n = values.length;
         double step = frame.width / n;
-        
+        double x, y;
         double px = 0;
         double py = values[0];
+        
         g.setColor(Color.red);
-        g.setStroke(new BasicStroke(3));
+        g.setStroke(new BasicStroke(1));
+        g.translate(0, h);
+        g.scale(1, -1);
         for(int i = 1; i < values.length; i++){
-            Line2D line = new Line2D.Double(px, py, i*step, values[i] * h);
+            Line2D line = new Line2D.Double(px, py, px = i*step, py = values[i] * h);
             
             g.draw(line);
         }
         
-        if(sls != null){
-            sls.draw(g);
+        if(sds != null){
+            sds.draw(g);
         }
     }
 }

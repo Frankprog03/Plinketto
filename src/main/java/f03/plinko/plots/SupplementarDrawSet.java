@@ -3,7 +3,7 @@ package f03.plinko.plots;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
+import java.awt.Shape;
 
 import java.util.HashSet;
 
@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  * @author Sollazzi
  */
-public class SupplementarLineSet {
+public class SupplementarDrawSet {
     private HashSet<StrokeElement> set = new HashSet<>();
     
     public void add(StrokeElement se){
@@ -26,19 +26,19 @@ public class SupplementarLineSet {
         for(StrokeElement se : set){
             g.setColor(se.color);
             g.setStroke(se.stroke);
-            g.draw(se.line);
+            g.draw(se.shape);
         }
     }
     
     public class StrokeElement {
         public Color color;
         public BasicStroke stroke;
-        public Line2D.Double line;
+        public Shape shape;
         
-        public StrokeElement(Color color, BasicStroke stroke, Line2D.Double line){
+        public StrokeElement(Color color, BasicStroke stroke, Shape shape){
             this.color = color;
             this.stroke = stroke;
-            this.line = line;
+            this.shape = shape;
         }
     }
 }
