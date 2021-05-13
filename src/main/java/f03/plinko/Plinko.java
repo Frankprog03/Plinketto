@@ -39,7 +39,7 @@ public class Plinko {
     private Random rand = new Random();
     
     private Histogram histogram = new Histogram(null);
-    private FunctionPlot2D plot = new FunctionPlot2D(new Gaussian(1.0, 1.0), -3.0, 3.0, 0.001);
+    private FunctionPlot2D plot = new FunctionPlot2D(new Gaussian(1.0, 0.0), -3.0, 3.0, 0.001);
     
     public void generatePlinko(int b){
         franz.clear();
@@ -129,8 +129,8 @@ public class Plinko {
             ballSet.remove(toRemove);
         }
         
-        //histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
-        plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
+        histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
+        plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 210, (size-1)*30, 200), g);
     }
     
     public void addBall(Circle c){
