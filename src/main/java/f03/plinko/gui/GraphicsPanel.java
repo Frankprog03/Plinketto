@@ -90,7 +90,15 @@ public class GraphicsPanel extends javax.swing.JPanel {
         
         plinko.update(g);
     }
+    
+    public void setnumber(int b){
+        plinko.reset();
+        plinko.generatePlinko(b);
+    }
 
+    public void setnpalline(int np){
+        for(int i=0;i<np;i++) plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

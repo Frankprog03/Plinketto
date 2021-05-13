@@ -66,12 +66,11 @@ public class Plinko {
     
     public void update(Graphics2D g){
         rand = new Random(); //shuffle seed
-        ballSet.add(new Circle(new Vector2(rand.nextFloat() - 0.5, 10.0), 4.0, false));
         
         //linee bidoncini
         boolean colorSwitch = false;
-        for(int i = 0; i < size-1; i++){
-            int x = (-size/2+i+1)*30-15;
+        for(int i = 0; i < size+1; i++){
+            int x = (-size/2+i)*30-15;
             
             g.setStroke(new BasicStroke(3));
             g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
@@ -147,6 +146,7 @@ public class Plinko {
     
     public void reset(){
         bidoncini = new int[bidoncini.length];
+        histogram.reset();
     }
     
     public void set(int pos, int val){
