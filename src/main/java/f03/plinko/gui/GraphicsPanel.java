@@ -27,6 +27,8 @@ public class GraphicsPanel extends javax.swing.JPanel {
     int delay=1;
     MainJFrame mjfr;
     
+    private boolean fromIDE = false;
+    
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
         repaint();
         ct+=10;
@@ -36,6 +38,8 @@ public class GraphicsPanel extends javax.swing.JPanel {
             mjfr.aggiornacontatore(pt-cp);
         }
     });
+    
+    public GraphicsPanel(){ fromIDE = true;}
     
     public GraphicsPanel(MainJFrame m) {
         initComponents();
@@ -95,6 +99,8 @@ public class GraphicsPanel extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g2){
         super.paintComponent(g2);
+        
+        if(fromIDE) return;
         
         Graphics2D g = (Graphics2D) g2;
         
