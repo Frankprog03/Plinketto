@@ -93,8 +93,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Velocità generazione");
 
-        jSlider1.setMaximum(50);
         jSlider1.setMinimum(1);
+        jSlider1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);

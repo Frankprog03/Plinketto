@@ -26,7 +26,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     private Timer timer = new Timer(10, (ActionEvent evt) -> {
         repaint();
         ct+=10;
-        if((ct%((51-delay)*10)==0)&&(cp>0)){
+        if((ct%((101-delay)*10)==0)&&(cp>0)){
             plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
             cp--;
             mjfr.aggiornacontatore(pt-cp);
