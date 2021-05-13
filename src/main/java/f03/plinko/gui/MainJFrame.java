@@ -52,11 +52,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setText("14");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+
+        jTextField2.setText("100");
 
         jButton1.setText("Aggiungi una pallina");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +79,7 @@ public class MainJFrame extends javax.swing.JFrame {
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 474, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +104,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setText("50");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,7 +137,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -200,7 +203,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton1.setVisible(true);
         jLabel2.setVisible(false);
         jLabel5.setVisible(false);
-        jSlider1.setVisible(false);    
+        jSlider1.setVisible(false);
+        jLabel6.setVisible(false);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -210,6 +214,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setVisible(true);
         jLabel5.setVisible(true);
         jSlider1.setVisible(true);
+        jLabel6.setVisible(true);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -254,6 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
             cavva.jLabel2.setVisible(false);
             cavva.jSlider1.setVisible(false);
             cavva.jLabel5.setVisible(false);
+            cavva.jLabel6.setVisible(false);
         });
     }
 
