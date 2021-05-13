@@ -94,7 +94,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     
     public void setnumber(int b){
         plinko.reset();
-        plinko.generatePlinko(b);
+        plinko.generatePlinko(b-1);
     }
 
     public void setnpalline(int np){
