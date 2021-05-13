@@ -14,6 +14,7 @@ import javax.swing.Timer;
 /**
  *
  * @author Sollazzi
+ * @author GABRIELE MARIA
  */
 public class GraphicsPanel extends javax.swing.JPanel {
     Plinko plinko = new Plinko();

@@ -20,9 +20,9 @@ import java.util.Random;
 /**
  *
  * @author Sollazzi
+ * @author GABRIELE MARIA
  */
 public class Plinko {
-    
     public static void main(String[] args){
         MainJFrame.main(args);
     }
@@ -32,6 +32,8 @@ public class Plinko {
     private int left = -1;
     private int bottom = -1;
     private int size = -1;
+    
+    private double mean = 0.0, stdev = 1.0;
         
     private ArrayList<Circle> franz = new ArrayList();
     private HashSet<Circle> ballSet = new HashSet();
@@ -96,8 +98,7 @@ public class Plinko {
                 int index = (int) (xpos/(size*30)*bidoncini.length);
                 
                 //g.fillOval(xpos/(size*30), left, index, left);
-                
-                System.out.println(index);
+                //System.out.println(index);
 
                 bidoncini[index]++;
 
@@ -127,6 +128,9 @@ public class Plinko {
         for(Circle toRemove : removeQueue){
             ballSet.remove(toRemove);
         }
+        
+        mean  = Statistics.mean(bidoncini);
+        stdev = Statistics.stdev(bidoncini, mean);
         
         histogram.draw(new Rectangle((-size/2+1)*30-15, bottom + 10, (size-1)*30, 200), g);
         plot.draw(new Rectangle((-size/2+1)*30-15, bottom + 210, (size-1)*30, 200), g);
