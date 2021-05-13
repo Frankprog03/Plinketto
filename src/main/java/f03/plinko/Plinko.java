@@ -69,7 +69,8 @@ public class Plinko {
         
         //linee bidoncini
         boolean colorSwitch = false;
-        for(int i = 0; i < size+1; i++){
+        if(size%2==0){
+            for(int i = 0; i < size+1; i++){
             int x = (-size/2+i)*30-15;
             
             g.setStroke(new BasicStroke(3));
@@ -77,6 +78,18 @@ public class Plinko {
             g.drawLine(x, bottom, x + 30, bottom);
             
             colorSwitch =! colorSwitch;
+            }
+        }
+        if(size%2==1){
+            for(int i = 0; i < size+1; i++){
+            int x =((-size/2+i)*30-30);
+            
+            g.setStroke(new BasicStroke(3));
+            g.setColor((colorSwitch) ? Color.red : new Color(127, 0, 0));
+            g.drawLine(x, bottom, x + 30, bottom);
+            
+            colorSwitch =! colorSwitch;
+            }
         }
         
         //update plinketto e palline
@@ -116,7 +129,6 @@ public class Plinko {
                         ball.setPosition(correctedPos);
                         ball.setVelocity(correctedVel);
                     }
-                    
                     break;
                 }
             }
