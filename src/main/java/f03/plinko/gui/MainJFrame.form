@@ -148,6 +148,9 @@
       </Events>
     </Component>
     <Container class="f03.plinko.gui.GraphicsPanel" name="panel">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new f03.plinko.gui.GraphicsPanel(this)"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

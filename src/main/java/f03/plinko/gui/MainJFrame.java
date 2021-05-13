@@ -25,7 +25,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        panel = new f03.plinko.gui.GraphicsPanel();
+        panel = new f03.plinko.gui.GraphicsPanel(this);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
