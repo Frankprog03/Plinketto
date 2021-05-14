@@ -285,10 +285,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     public void showstats(double m,double s,double c){
-        jLabel9.setText(Double.toString(m));
-        jLabel10.setText(Double.toString(s));
-        jLabel13.setText(Double.toString(c));
-        jLabel14.setText(Double.toString(s*s));
+        jLabel9.setText(Double.toString(Math.round(m*1000)/1000.0));
+        jLabel10.setText(Double.toString(Math.round(s*1000)/1000.0));
+        jLabel13.setText(Double.toString(Math.round(c*1000)/1000.0));
+        jLabel14.setText(Double.toString(Math.round(s*s*1000)/1000.0));
     }
     
     /**
