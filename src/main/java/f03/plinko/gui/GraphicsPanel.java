@@ -90,6 +90,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        /*
         plinko.addBall(
                 new Circle(
                         new Vector2(
@@ -101,6 +102,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
                         5.0
                 )
         );
+        */
     }//GEN-LAST:event_formMouseClicked
 
     @Override
