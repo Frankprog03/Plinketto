@@ -12,6 +12,7 @@ import f03.plinko.plots.SupplementarDrawSet.StrokeElement;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
@@ -38,9 +39,9 @@ public class Plinko {
     private int bottom = -1;
     private int size = -1;
     
-    private Double mean = new Double (0.0);
-    private Double stdev = new Double (1.0);
-    private Double corstdev = new Double (1.0);
+    private Double mean = 0.0;
+    private Double stdev = 1.0;
+    private Double corstdev = 1.0;
         
     private ArrayList<Circle> franz = new ArrayList();
     private HashSet<Circle> ballSet = new HashSet();
@@ -75,6 +76,19 @@ public class Plinko {
         
         plot = new FunctionPlot2D(gauss = new Gaussian(Double.NaN, Double.NaN), 0.0, b, 0.01);
         plot.setNormalization(true);
+        
+        if(SettingsHolder.mainFrame != null){
+            int minimumWidth = -2*left+SettingsHolder.mainFrame.lateralPanel.getWidth() + 80;
+            int minimumHeight = bottom + 480;
+            
+            Dimension minAndPreferred = new Dimension(minimumWidth, minimumHeight);
+            Dimension current = SettingsHolder.mainFrame.getSize();
+            
+            SettingsHolder.mainFrame.setPreferredSize(minAndPreferred);
+            SettingsHolder.mainFrame.setMinimumSize(minAndPreferred);
+            if(minAndPreferred.width > current.width || minAndPreferred.height > current.height)
+                SettingsHolder.mainFrame.setSize(minAndPreferred);
+        }
     }
     
     public void update(Graphics2D g){
@@ -109,8 +123,6 @@ public class Plinko {
             if(ypos > bottom){
                 xpos -= left - 15;
                 int index = (int) -(xpos*size/(2*left));
-                
-                //System.out.println("Ball x: " + xpos + " and calc index " + index);
 
                 bidoncini[index]++;
 
