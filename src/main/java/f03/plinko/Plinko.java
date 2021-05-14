@@ -174,7 +174,6 @@ public class Plinko {
             
             gauss.setMean(mean);
             gauss.setStandardDeviation(stdev);
-            
             plot.setSDS(sds);
             plot.calc();
         }

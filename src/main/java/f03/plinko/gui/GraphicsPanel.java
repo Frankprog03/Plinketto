@@ -44,7 +44,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     public GraphicsPanel(MainJFrame m) {
         initComponents();
         
-        plinko.generatePlinko(14);
+        plinko.generatePlinko(15);
         
         this.mjfr=m;
         

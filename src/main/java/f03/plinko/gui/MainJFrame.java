@@ -52,7 +52,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("14");
+        jTextField1.setText("15");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
