@@ -8,18 +8,15 @@ import f03.plinko.physics.Vector2;
 import f03.plinko.plots.FunctionPlot2D;
 import f03.plinko.plots.Histogram;
 import f03.plinko.plots.SupplementarDrawSet;
-import f03.plinko.plots.SupplementarDrawSet.StrokeElement;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
+
 import static java.lang.Double.isNaN;
 
 import java.util.ArrayList;
