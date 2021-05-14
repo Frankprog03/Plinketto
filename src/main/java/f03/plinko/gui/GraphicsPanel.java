@@ -37,11 +37,9 @@ public class GraphicsPanel extends javax.swing.JPanel {
             plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
             cp--;
             mjfr.updateCounter(plinko.getNumberOfBalls());
+            if(cp==0) mjfr.file();
         }
         mjfr.showStats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
-        if(cp==0){
-            mjfr.file();
-        }
     });
     
     public GraphicsPanel(){ fromIDE = true; }

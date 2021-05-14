@@ -19,19 +19,6 @@ public class Statistics {
         return num/den;
     }
     
-    /*public static double meanmean(int P[]){
-        int num=0, c=0;
-        double den=0;
-        
-        for (int b : P) {
-            num=num+b*c;
-            den=den+b;
-            c++;
-        }
-        
-        return num/den;
-    }*/
-    
     public static double stdev(int P[], double mean){
         double num=0, den=0;
         
