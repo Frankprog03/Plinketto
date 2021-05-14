@@ -39,7 +39,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
         }
     });
     
-    public GraphicsPanel(){ fromIDE = true;}
+    public GraphicsPanel(){ fromIDE = true; }
     
     public GraphicsPanel(MainJFrame m) {
         initComponents();
