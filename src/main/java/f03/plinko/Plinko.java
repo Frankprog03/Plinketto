@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import static java.lang.Double.isNaN;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,7 +38,9 @@ public class Plinko {
     private int bottom = -1;
     private int size = -1;
     
-    private double mean = 0.0, stdev = 1.0;
+    private Double mean = new Double (0.0);
+    private Double stdev = new Double (1.0);
+    private Double corstdev = new Double (1.0);
         
     private ArrayList<Circle> franz = new ArrayList();
     private HashSet<Circle> ballSet = new HashSet();
@@ -139,6 +142,7 @@ public class Plinko {
         
         mean  = Statistics.mean(bidoncini);
         stdev = Statistics.stdev(bidoncini, mean);
+        corstdev= Statistics.corstdev(bidoncini, mean);
         mean -= 1;
         
         if(mean != gauss.getMean() || stdev != gauss.getStandardDeviation()){
@@ -174,7 +178,7 @@ public class Plinko {
             
             gauss.setMean(mean);
             gauss.setStandardDeviation(stdev);
-            
+
             plot.setSDS(sds);
             plot.calc();
         }
@@ -210,5 +214,20 @@ public class Plinko {
     
     public int[] getBidoncini(){
         return bidoncini;
+    }
+
+    public double getMean() {
+        if(isNaN(mean)) return 0;
+        return mean+1;
+    }
+
+    public double getStdev() {
+        if(isNaN(stdev)) return 0;
+        return stdev;
+    }
+    
+    public double getCorstdev() {
+        if(isNaN(corstdev)) return 0;
+        return corstdev;
     }
 }

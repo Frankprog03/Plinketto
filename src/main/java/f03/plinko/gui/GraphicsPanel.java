@@ -25,6 +25,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     int ct=0;
     int cp=0,pt=0;
     int delay=1;
+    double mean=0,stdev=0;
     MainJFrame mjfr;
     
     private boolean fromIDE = false;
@@ -37,6 +38,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
             cp--;
             mjfr.aggiornacontatore(pt-cp);
         }
+        mjfr.showstats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
     });
     
     public GraphicsPanel(){ fromIDE = true; }
@@ -44,7 +46,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
     public GraphicsPanel(MainJFrame m) {
         initComponents();
         
-        plinko.generatePlinko(14);
+        plinko.generatePlinko(15);
         
         this.mjfr=m;
         
