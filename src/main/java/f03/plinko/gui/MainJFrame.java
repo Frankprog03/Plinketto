@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -408,27 +409,32 @@ public class MainJFrame extends javax.swing.JFrame {
         double med=panel.getMean();
         double sd=panel.getStdev();
         double csd=panel.getCorstdev();
-        File file=new File("");
-        String s=(String) comboBox_fileFormat.getSelectedItem();
-        switch(s){
-            case ".rtf":
-                file=new File("plinko.rtf");
-                break;
-            case ".txt":
-                file=new File("plinko.txt");
-                break;
-        }
+        
+        JFileChooser chooser = new JFileChooser();
+        
+        chooser.showSaveDialog(this);
+        
+        File file = chooser.getSelectedFile();
+        
+        String s = file.getPath() + (String) comboBox_fileFormat.getSelectedItem();
+        
+        file = new File(s);
+        
         FileWriter f = null;
+        
         try {
             f = new FileWriter(file);
         } catch (IOException ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PrintWriter p=new PrintWriter(f);
+        
+        PrintWriter p = new PrintWriter(f);
         p.printf("Simulazione di un plinko %dX%d con %d palline.\n",b,b,np);
+        
         for(int i=0;i<b;i++){
             p.printf("Bidone %d: %d palline.\n",i+1,bid[i]);
         }
+        
         p.printf("Media: %f\n Deviazione standard:%f\n Deviazione standard corretta:%f\n Varianza:%f\n",med,sd,csd,sd*sd);
         p.close();
     }//GEN-LAST:event_button_generateFileActionPerformed
