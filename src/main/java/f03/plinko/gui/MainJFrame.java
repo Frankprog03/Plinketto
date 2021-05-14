@@ -398,10 +398,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     
     public void showStats(double m,double s,double c){
-        label_mean.setText(Double.toString(m));
-        label_stdev.setText(Double.toString(s));
-        label_cstdev.setText(Double.toString(c));
-        label_variance.setText(Double.toString(s*s));
+        label_mean.setText(Double.toString(Math.round(m*1000)/1000.0));
+        label_stdev.setText(Double.toString(Math.round(s*1000)/1000.0));
+        label_cstdev.setText(Double.toString(Math.round(c*1000)/1000.0));
+        label_variance.setText(Double.toString(Math.round(s*s*1000)/1000.0));
     }
     
     /**
