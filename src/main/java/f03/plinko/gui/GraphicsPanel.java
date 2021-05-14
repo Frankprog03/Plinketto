@@ -39,6 +39,9 @@ public class GraphicsPanel extends javax.swing.JPanel {
             mjfr.updateCounter(plinko.getNumberOfBalls());
         }
         mjfr.showStats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
+        if(cp==0){
+            mjfr.file();
+        }
     });
     
     public GraphicsPanel(){ fromIDE = true; }
@@ -143,6 +146,22 @@ public class GraphicsPanel extends javax.swing.JPanel {
     
     public void setDelay(int d){
         delay=d;
+    }
+    
+    public double getMean(){
+        return plinko.getMean();
+    }
+    
+    public double getStdev(){
+        return plinko.getStdev();
+    }
+    
+    public double getCorstdev(){
+        return plinko.getCorstdev();
+    }
+    
+    public int[] getBidoncini(){
+        return plinko.getBidoncini();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
