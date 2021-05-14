@@ -1,5 +1,6 @@
 package f03.plinko.plots;
 
+import f03.plinko.Plinko;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -76,7 +77,7 @@ public class Histogram {
             g.setColor(Color.black);
             g.drawRect(i * step, 0, step, (int) value);
             g.scale(1, -1);
-            g.drawString(Integer.toString(buckets[i]), i * step, -10);
+            Plinko.drawCenteredString(g, Integer.toString(buckets[i]), new Rectangle(i*step, -10, step, -10));
             g.scale(1, -1);
         }
         

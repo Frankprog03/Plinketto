@@ -36,7 +36,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
         if((ct%((101-delay)*10)==0)&&(cp>0)){
             plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
             cp--;
-            mjfr.updateCounter(pt-cp);
+            mjfr.updateCounter(plinko.getNumberOfBalls());
         }
         mjfr.showStats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
     });
@@ -135,6 +135,10 @@ public class GraphicsPanel extends javax.swing.JPanel {
     public void setNPalline(int np){
         cp=np;
         pt=np;
+    }
+    
+    public void addPallina(){
+        plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
     }
     
     public void setDelay(int d){

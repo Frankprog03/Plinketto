@@ -13,6 +13,9 @@ import f03.plinko.plots.SupplementarDrawSet.StrokeElement;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
@@ -38,6 +41,8 @@ public class Plinko {
     private int left = -1;
     private int bottom = -1;
     private int size = -1;
+    
+    private int cnt = 0;
     
     private Double mean = 0.0;
     private Double stdev = 1.0;
@@ -147,15 +152,17 @@ public class Plinko {
             ball.draw(g);
         }
         
-        //per evitare la ConcurrentModificationException
-        for(Circle toRemove : removeQueue){
-            ballSet.remove(toRemove);
-        }
-        
         mean  = Statistics.mean(bidoncini);
         stdev = Statistics.stdev(bidoncini, mean);
         corstdev= Statistics.corstdev(bidoncini, mean);
         mean -= 1;
+        
+        //per evitare la ConcurrentModificationException
+        for(Circle toRemove : removeQueue){
+            ballSet.remove(toRemove);
+        
+            SettingsHolder.mainFrame.mpp.update(mean, stdev);
+        }
         
         if(mean != gauss.getMean() || stdev != gauss.getStandardDeviation()){
             SupplementarDrawSet sds = new SupplementarDrawSet();
@@ -201,6 +208,10 @@ public class Plinko {
     
     public void addBall(Circle c){
         ballSet.add(c);
+        
+        if(SettingsHolder.mainFrame != null){
+            SettingsHolder.mainFrame.updateCounter(ballSet.size());
+        }
     }
     
     public void removeBall(Circle c){
@@ -209,11 +220,21 @@ public class Plinko {
     
     public void increment(int pos){
         bidoncini[pos]++;
+        
+        cnt++;
     }
     
     public void reset(){
         bidoncini = new int[bidoncini.length];
+        ballSet.clear();
         histogram.reset();
+        SettingsHolder.mainFrame.mpp.reset();
+        
+        if(SettingsHolder.mainFrame != null){
+            SettingsHolder.mainFrame.updateCounter(0);
+        }
+        
+        cnt = 0;
     }
     
     public void set(int pos, int val){
@@ -241,5 +262,18 @@ public class Plinko {
     public double getCorstdev() {
         if(isNaN(corstdev)) return 0;
         return corstdev;
+    }
+    
+    public int getNumberOfBalls(){
+        return cnt + ballSet.size();
+    }
+    
+    public static void drawCenteredString(Graphics g, String text, Rectangle rect) {
+        FontMetrics metrics = g.getFontMetrics(g.getFont());
+        
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        
+        g.drawString(text, x, y);
     }
 }

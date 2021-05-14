@@ -82,9 +82,9 @@ public class FunctionPlot2D {
         double step = frame.width / n;
         double x, y;
         double px = 0;
-        double py = values[0];
+        double py = values[0] * h;
         
-        g.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        g.setStroke(new BasicStroke(3));
         g.translate(0, h + 10);
         g.scale(1, -1);
         g.drawLine(10, 0, 10, h);
