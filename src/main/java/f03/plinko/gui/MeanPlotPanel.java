@@ -110,6 +110,7 @@ public class MeanPlotPanel extends javax.swing.JPanel {
         jLabel1.setText("Numero di dati massimo");
 
         slider_max.setMaximum(1000);
+        slider_max.setMinimum(5);
         slider_max.setValue(100);
         slider_max.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {

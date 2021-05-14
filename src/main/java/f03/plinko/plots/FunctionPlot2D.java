@@ -94,7 +94,7 @@ public class FunctionPlot2D {
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(1));
         for(int i = 1; i < values.length; i++){
-            Line2D line = new Line2D.Double(px, py, px = i*step, py = values[i] * h);
+            Line2D line = new Line2D.Double(px, py, px = i*step + 0, py = values[i] * h);
             
             g.draw(line);
         }

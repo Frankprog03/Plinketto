@@ -155,7 +155,6 @@ public class Plinko {
         mean  = Statistics.mean(bidoncini);
         stdev = Statistics.stdev(bidoncini, mean);
         corstdev= Statistics.corstdev(bidoncini, mean);
-        mean -= 1;
         
         //per evitare la ConcurrentModificationException
         for(Circle toRemove : removeQueue){
@@ -167,6 +166,7 @@ public class Plinko {
         if(mean != gauss.getMean() || stdev != gauss.getStandardDeviation()){
             SupplementarDrawSet sds = new SupplementarDrawSet();
             
+            /*
             sds.add(
                     new StrokeElement(
                             new Color(255, 0, 0, 50), 
@@ -194,6 +194,7 @@ public class Plinko {
                             )
                     )
             );
+            */
             
             gauss.setMean(mean);
             gauss.setStandardDeviation(stdev);
