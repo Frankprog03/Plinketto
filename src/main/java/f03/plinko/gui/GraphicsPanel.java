@@ -36,19 +36,21 @@ public class GraphicsPanel extends javax.swing.JPanel {
         if((ct%((101-delay)*10)==0)&&(cp>0)){
             plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
             cp--;
-            mjfr.aggiornacontatore(pt-cp);
+            mjfr.updateCounter(pt-cp);
         }
-        mjfr.showstats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
+        mjfr.showStats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
     });
     
-    public GraphicsPanel(){ fromIDE = true;}
+    public GraphicsPanel(){ fromIDE = true; }
     
     public GraphicsPanel(MainJFrame m) {
         initComponents();
         
-        plinko.generatePlinko(15);
-        
         this.mjfr=m;
+    }
+    
+    public void init(){
+        plinko.generatePlinko(15);
         
         timer.start();
     }
@@ -125,17 +127,17 @@ public class GraphicsPanel extends javax.swing.JPanel {
         }
     }
     
-    public void setnumber(int b){
+    public void setNumber(int b){
         plinko.reset();
         plinko.generatePlinko(b-1);
     }
 
-    public void setnpalline(int np){
+    public void setNPalline(int np){
         cp=np;
         pt=np;
     }
     
-    public void setdelay(int d){
+    public void setDelay(int d){
         delay=d;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
