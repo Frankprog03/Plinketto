@@ -114,10 +114,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Dev. standard");
 
         jLabel11.setText("Dev. st. corretta");
 
+        jLabel7.setForeground(new java.awt.Color(0, 0, 255));
         jLabel7.setText("Media");
 
         label_nPalline.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -127,6 +129,7 @@ public class MainJFrame extends javax.swing.JFrame {
         label_variance.setText("-");
 
         label_stdev.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        label_stdev.setForeground(new java.awt.Color(255, 0, 0));
         label_stdev.setText("-");
 
         jLabel12.setText("Varianza");
@@ -137,6 +140,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel3.setText("N° palline");
 
         label_mean.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        label_mean.setForeground(new java.awt.Color(0, 0, 255));
         label_mean.setText("-");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -359,6 +363,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void button_addBallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addBallActionPerformed
         panel.addPallina();
+        button_generateFile.setVisible(false);
+        comboBox_fileFormat.setVisible(false);
     }//GEN-LAST:event_button_addBallActionPerformed
 
     private void radio_manualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_manualActionPerformed
@@ -400,6 +406,8 @@ public class MainJFrame extends javax.swing.JFrame {
         np = clampNumeroBidoni(np);
         
         panel.setNumber(np);
+        
+        panel.setfinito(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void button_generateFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_generateFileActionPerformed
@@ -435,7 +443,7 @@ public class MainJFrame extends javax.swing.JFrame {
             p.printf("Bidone %d: %d palline.\n",i+1,bid[i]);
         }
         
-        p.printf("Media: %f\n Deviazione standard:%f\n Deviazione standard corretta:%f\n Varianza:%f\n",med,sd,csd,sd*sd);
+        p.printf("Media: %f\nDeviazione standard:%f\nDeviazione standard corretta:%f\nVarianza:%f\n",med,sd,csd,sd*sd);
         p.close();
     }//GEN-LAST:event_button_generateFileActionPerformed
     
@@ -466,10 +474,14 @@ public class MainJFrame extends javax.swing.JFrame {
         label_variance.setText(Double.toString(Math.round(s*s*1000)/1000.0));
     }
     
-    public void file()
-    {
+    public void showfile(){
         button_generateFile.setVisible(true);
         comboBox_fileFormat.setVisible(true);
+    }
+    
+    public void hidefile(){
+        button_generateFile.setVisible(false);
+        comboBox_fileFormat.setVisible(false);
     }
     /**
      * @param args the command line arguments

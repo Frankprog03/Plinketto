@@ -36,10 +36,11 @@ public class GraphicsPanel extends javax.swing.JPanel {
         if((ct%((101-delay)*10)==0)&&(cp>0)){
             plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
             cp--;
-            mjfr.updateCounter(plinko.getNumberOfBalls());
-            if(cp==0) mjfr.file();
+            mjfr.updateCounter(pt-cp);
         }
         mjfr.showStats(plinko.getMean(),plinko.getStdev(),plinko.getCorstdev());
+        if(plinko.getFinito()==true) mjfr.showfile();
+        if(plinko.getFinito()==false) mjfr.hidefile();
     });
     
     public GraphicsPanel(){ fromIDE = true; }
@@ -148,6 +149,9 @@ public class GraphicsPanel extends javax.swing.JPanel {
         delay=d;
     }
     
+    public void setfinito(boolean f){
+        plinko.setFinito(f);
+    }
     public double getMean(){
         return plinko.getMean();
     }

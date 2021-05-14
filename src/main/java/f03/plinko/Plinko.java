@@ -8,6 +8,7 @@ import f03.plinko.physics.Vector2;
 import f03.plinko.plots.FunctionPlot2D;
 import f03.plinko.plots.Histogram;
 import f03.plinko.plots.SupplementarDrawSet;
+import f03.plinko.plots.SupplementarDrawSet.StrokeElement;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,6 +17,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 import static java.lang.Double.isNaN;
 
@@ -53,6 +56,8 @@ public class Plinko {
     private Gaussian gauss = new Gaussian(1.0, 0.0);
     private Histogram histogram = new Histogram(null);
     private FunctionPlot2D plot;
+    
+    private boolean finito=false;
     
     public void generatePlinko(int b){
         franz.clear();
@@ -158,18 +163,20 @@ public class Plinko {
             ballSet.remove(toRemove);
         
             SettingsHolder.mainFrame.mpp.update(mean, stdev);
+            
+            if(ballSet.isEmpty()) finito=true;
         }
         
         if(mean != gauss.getMean() || stdev != gauss.getStandardDeviation()){
             SupplementarDrawSet sds = new SupplementarDrawSet();
             
-            /*
+            
             sds.add(
                     new StrokeElement(
                             new Color(255, 0, 0, 50), 
                             new BasicStroke(1), 
                             new Rectangle2D.Double(
-                                    (mean - stdev) * -2*left / (double)size + 25,
+                                    (mean-1 - stdev) * -2*left / (double)size + 15,
                                     0, 
                                     (2 * stdev) * -2*left / (double)size, 
                                     200),
@@ -187,11 +194,11 @@ public class Plinko {
                                     new float[]{5.0f, 3.0f},
                                     0.0f), 
                             new Line2D.Double(
-                                    mean * -2*left / (double)size + 25, 0, mean * -2*left / (double)size + 25, 200
+                                    (mean-1)* -2*left / (double)size + 15, 0, (mean-1) * -2*left / (double)size + 15, 200
                             )
                     )
             );
-            */
+            
             
             gauss.setMean(mean-1);
             gauss.setStandardDeviation(stdev);
@@ -238,7 +245,11 @@ public class Plinko {
     public void set(int pos, int val){
         bidoncini[pos] = val;
     }
-    
+
+    public void setFinito(boolean finito) {
+        this.finito = finito;
+    }
+
     public int get(int pos){
         return bidoncini[pos];
     }
@@ -249,7 +260,7 @@ public class Plinko {
 
     public double getMean() {
         if(isNaN(mean)) return 0;
-        return mean+1;
+        return mean;
     }
 
     public double getStdev() {
@@ -273,5 +284,9 @@ public class Plinko {
         int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
         
         g.drawString(text, x, y);
+    }
+    
+    public boolean getFinito(){
+        return finito;
     }
 }

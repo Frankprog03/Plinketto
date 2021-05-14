@@ -71,6 +71,7 @@ public class MeanPlotPanel extends javax.swing.JPanel {
                 g.draw(new Line2D.Double(p1, p2));
                 g.setColor(Color.red);
                 g.draw(new Line2D.Double(p1s1, p2s1));
+                g.setColor(Color.green);
                 g.draw(new Line2D.Double(p1s2, p2s2));
 
                 pymean = mean;
