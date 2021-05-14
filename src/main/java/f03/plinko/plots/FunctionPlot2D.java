@@ -74,7 +74,7 @@ public class FunctionPlot2D {
     }
     
     public void draw(Rectangle frame, Graphics2D g2d){
-        Graphics2D g = (Graphics2D) g2d.create(frame.x - 10, frame.y, frame.width, frame.height + 10);
+        Graphics2D g = (Graphics2D) g2d.create(frame.x, frame.y, frame.width, frame.height);
         
         int w = frame.width;
         int h = frame.height;
@@ -84,12 +84,12 @@ public class FunctionPlot2D {
         double px = 0;
         double py = values[0] * h;
         
-        g.setStroke(new BasicStroke(3));
-        g.translate(0, h + 10);
+        //g.setStroke(new BasicStroke(3));
+        g.translate(0, h);
         g.scale(1, -1);
-        g.drawLine(10, 0, 10, h);
-        g.drawLine(0, 10, w, 10);
-        g.translate(0, 10);
+        //g.drawLine(10, 0, 10, h);
+        //g.drawLine(0, 10, w, 10);
+        //g.translate(0, 10);
         
         g.setColor(Color.red);
         g.setStroke(new BasicStroke(1));

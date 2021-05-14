@@ -1,6 +1,12 @@
 package f03.plinko.gui;
 
 import f03.plinko.SettingsHolder;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,6 +53,8 @@ public class MainJFrame extends javax.swing.JFrame {
         label_mean = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         mpp = new f03.plinko.gui.MeanPlotPanel();
+        button_generateFile = new javax.swing.JButton();
+        comboBox_fileFormat = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         radio_auto = new javax.swing.JRadioButton();
         radio_manual = new javax.swing.JRadioButton();
@@ -61,7 +69,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 642, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         input_nBidoni.setText("15");
@@ -147,11 +155,10 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(label_variance, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(label_cstdev, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                        .addComponent(label_mean, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(label_nPalline, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(label_stdev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(label_cstdev, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(label_mean, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_nPalline, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label_stdev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,6 +195,15 @@ public class MainJFrame extends javax.swing.JFrame {
 
         mpp.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
+        button_generateFile.setText("Genera file");
+        button_generateFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_generateFileActionPerformed(evt);
+            }
+        });
+
+        comboBox_fileFormat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".rtf", ".txt" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,12 +225,16 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(slider_genvel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(button_addBall, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(button_generateFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboBox_fileFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(button_startSim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(button_addBall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -238,6 +258,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mpp, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBox_fileFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_generateFile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(button_addBall)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,6 +400,38 @@ public class MainJFrame extends javax.swing.JFrame {
         
         panel.setNumber(np);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void button_generateFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_generateFileActionPerformed
+        int b=Integer.parseInt(input_nBidoni.getText());
+        int np=Integer.parseInt(input_nPalline.getText());
+        int bid[]=panel.getBidoncini();
+        double med=panel.getMean();
+        double sd=panel.getStdev();
+        double csd=panel.getCorstdev();
+        File file=new File("");
+        String s=(String) comboBox_fileFormat.getSelectedItem();
+        switch(s){
+            case ".rtf":
+                file=new File("plinko.rtf");
+                break;
+            case ".txt":
+                file=new File("plinko.txt");
+                break;
+        }
+        FileWriter f = null;
+        try {
+            f = new FileWriter(file);
+        } catch (IOException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PrintWriter p=new PrintWriter(f);
+        p.printf("Simulazione di un plinko %dX%d con %d palline.\n",b,b,np);
+        for(int i=0;i<b;i++){
+            p.printf("Bidone %d: %d palline.\n",i+1,bid[i]);
+        }
+        p.printf("Media: %f\n Deviazione standard:%f\n Deviazione standard corretta:%f\n Varianza:%f\n",med,sd,csd,sd*sd);
+        p.close();
+    }//GEN-LAST:event_button_generateFileActionPerformed
     
     private int clampNumeroBidoni(int np){
         if(np > 30){
@@ -404,6 +460,11 @@ public class MainJFrame extends javax.swing.JFrame {
         label_variance.setText(Double.toString(Math.round(s*s*1000)/1000.0));
     }
     
+    public void file()
+    {
+        button_generateFile.setVisible(true);
+        comboBox_fileFormat.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -431,6 +492,8 @@ public class MainJFrame extends javax.swing.JFrame {
             cavva.slider_genvel.setVisible(false);
             cavva.jLabel5.setVisible(false);
             cavva.jLabel6.setVisible(false);
+            cavva.button_generateFile.setVisible(false);
+            cavva.comboBox_fileFormat.setVisible(false);
             
             SettingsHolder.mainFrame = cavva;
             
@@ -442,7 +505,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton button_addBall;
+    private javax.swing.JButton button_generateFile;
     private javax.swing.JButton button_startSim;
+    private javax.swing.JComboBox<String> comboBox_fileFormat;
     private javax.swing.JTextField input_nBidoni;
     private javax.swing.JTextField input_nPalline;
     private javax.swing.JButton jButton1;

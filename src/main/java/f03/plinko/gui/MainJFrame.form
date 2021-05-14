@@ -65,7 +65,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="642" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -127,13 +127,18 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="slider_genvel" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="button_addBall" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="button_generateFile" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="comboBox_fileFormat" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="button_startSim" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="button_addBall" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -163,6 +168,11 @@
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="mpp" min="-2" pref="173" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="comboBox_fileFormat" min="-2" max="-2" attributes="0"/>
+                          <Component id="button_generateFile" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="button_addBall" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -261,12 +271,10 @@
                                   <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                   <Component id="label_variance" pref="139" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="label_cstdev" pref="140" max="32767" attributes="0"/>
-                                  <Component id="label_mean" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="label_nPalline" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="label_stdev" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="label_cstdev" pref="140" max="32767" attributes="0"/>
+                              <Component id="label_mean" alignment="1" max="32767" attributes="0"/>
+                              <Component id="label_nPalline" alignment="1" max="32767" attributes="0"/>
+                              <Component id="label_stdev" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -390,6 +398,27 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="button_generateFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Genera file"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_generateFileActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comboBox_fileFormat">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="2">
+                    <StringItem index="0" value=".rtf"/>
+                    <StringItem index="1" value=".txt"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>

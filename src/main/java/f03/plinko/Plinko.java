@@ -172,7 +172,7 @@ public class Plinko {
                             new Color(255, 0, 0, 50), 
                             new BasicStroke(1), 
                             new Rectangle2D.Double(
-                                    (mean - stdev) * -2*left / (double)size + 15,
+                                    (mean - stdev) * -2*left / (double)size + 25,
                                     0, 
                                     (2 * stdev) * -2*left / (double)size, 
                                     200),
@@ -190,7 +190,7 @@ public class Plinko {
                                     new float[]{5.0f, 3.0f},
                                     0.0f), 
                             new Line2D.Double(
-                                    mean * -2*left / (double)size + 15, 0, mean * -2*left / (double)size + 15, 200
+                                    mean * -2*left / (double)size + 25, 0, mean * -2*left / (double)size + 25, 200
                             )
                     )
             );
