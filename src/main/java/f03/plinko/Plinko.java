@@ -62,7 +62,7 @@ public class Plinko {
     public void generatePlinko(int b){
         franz.clear();
         
-        bidoncini = new int[b];
+        bidoncini = new int[b+1];
         histogram.bind(bidoncini);
         
         for(int i=0; i<b; i++){
