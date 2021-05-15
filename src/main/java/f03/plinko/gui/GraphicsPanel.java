@@ -34,7 +34,7 @@ public class GraphicsPanel extends javax.swing.JPanel {
         repaint();
         ct+=10;
         if((ct%((101-delay)*10)==0)&&(cp>0)){
-            plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false));
+            plinko.addBall(new Circle(new Vector2(0, 10.0), 4.0, false,2));
             cp--;
             mjfr.updateCounter(pt-cp);
         }
